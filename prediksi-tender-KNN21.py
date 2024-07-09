@@ -50,13 +50,13 @@ if uploaded_file is not None:
     st.write(data.head())
     
     # Menampilkan jumlah baris dataset
-    st.write(f"Jumlah baris dataset terkumpul: {data.shape[0]}")
+    st.write(f"Jumlah baris dalam dataset: {data.shape[0]}")
     
     knn, scaler, accuracy, report, y_test, y_pred = train_model(data)
     
-    st.write(f"##### Skor akurasi Model: {accuracy}")
-    #st.write("#### Overview evaluasi model:")
-    #st.text(report)
+    st.write(f"Akurasi Model: {accuracy}")
+    st.write("Laporan Klasifikasi:")
+    st.text(report)
     
     # Menyimpan model ke pickle object
     model_filename = 'knn_model.pkl'
@@ -68,22 +68,14 @@ if uploaded_file is not None:
     with open(scaler_filename, 'wb') as file:
         pickle.dump(scaler, file)
     
-    #st.write(f"Model telah disimpan ke {model_filename}")
-    #st.write(f"Scaler telah disimpan ke {scaler_filename}")
+    st.write(f"Model telah disimpan ke {model_filename}")
+    st.write(f"Scaler telah disimpan ke {scaler_filename}")
     
-    # Menampilkan confusion matrix
-    st.write("##### Tampilan Confusion Matrix Chart with test size 0.2")
-    f, ax = plt.subplots(figsize=(5, 2))
-    sns.heatmap(confusion_matrix(y_test, y_pred), annot=True, fmt=".0f", ax=ax)
-    plt.xlabel("y_pred")
-    plt.ylabel("y_true")
-    st.pyplot(f)
-
-    st.write("## Prediksi baru")
-    X1 = st.text_input("Isikan nilai kontrak")
-    X2 = st.text_input("Isikan nilai HPS")
-    X3 = st.number_input("Isikan lama hari kalender proses lelang mulai awal pengumuman s/d penetapan pemenang akhir", value=0)
-    X4 = st.number_input("Isikan rentang lama tahun anggaran pelaksanaan tender", value=0)
+    st.write("## Prediksi Kustom")
+    X1 = st.text_input("X1")
+    X2 = st.text_input("X2")
+    X3 = st.number_input("X3", value=0)
+    X4 = st.number_input("X4", value=0)
     
     if X1 and X2:
         X5 = float(X1.replace(',', '')) / float(X2.replace(',', ''))
@@ -92,9 +84,17 @@ if uploaded_file is not None:
         X5 = 0.0
         X6 = 0.0
     
-    X7 = st.number_input("Isikan skor PFA bersumber dari https://www.opentender.net/tender", value=0.0)
+    X7 = st.number_input("X7", value=0.0)
     
     if st.button("Prediksi"):
         input_data = [float(X1.replace(',', '')), float(X2.replace(',', '')), X3, X4, X5, X6, X7]
         prediction = predict(knn, scaler, input_data)
         st.write(f"Hasil Prediksi: {prediction[0]}")
+    
+    # Menampilkan confusion matrix
+    st.write("## Confusion Matrix")
+    f, ax = plt.subplots(figsize=(8, 5))
+    sns.heatmap(confusion_matrix(y_test, y_pred), annot=True, fmt=".0f", ax=ax)
+    plt.xlabel("y_pred")
+    plt.ylabel("y_true")
+    st.pyplot(f)
