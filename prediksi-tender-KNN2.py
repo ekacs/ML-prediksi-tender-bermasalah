@@ -76,8 +76,8 @@ if uploaded_file is not None:
     st.write("###### Tampilan Confusion Matrix Chart (test size 0.2)")
     f, ax = plt.subplots(figsize=(5, 2))
     sns.heatmap(confusion_matrix(y_test, y_pred), annot=True, fmt=".0f", ax=ax)
-    plt.xlabel("y_pred")
-    plt.ylabel("y_true")
+    plt.xlabel("prediksi")
+    plt.ylabel("aktual")
     st.pyplot(f)
 
     st.write("## Prediksi baru")
