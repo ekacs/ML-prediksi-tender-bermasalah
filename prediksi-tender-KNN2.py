@@ -39,22 +39,23 @@ def predict(knn, scaler, input_data):
     return prediction
 
 # Judul aplikasi
-st.title("Machine Learning dengan KNN")
+st.write("# Aplikasi prediksi pekerjaan yang berpotensi bermasalah (temuan)")
+st.write("##### Implementasi pemograman machine learning dengan algoritma KNN")
 
 # Mengunggah file CSV
-uploaded_file = st.file_uploader("Unggah file CSV", type=["csv"])
+uploaded_file = st.file_uploader("Unggah database file (format CSV)", type=["csv"])
 
 if uploaded_file is not None:
     data = pd.read_csv(uploaded_file)
-    st.write("Data yang diunggah:")
+    st.write("Tampilan database yang diunggah (5 record teratas):")
     st.write(data.head())
     
     # Menampilkan jumlah baris dataset
-    st.write(f"Jumlah baris dataset terkumpul: {data.shape[0]}")
+    st.write(f"Jumlah record database: {data.shape[0]}")
     
     knn, scaler, accuracy, report, y_test, y_pred = train_model(data)
     
-    st.write(f"##### Skor akurasi Model: {accuracy}")
+    st.write(f"###### Skor akurasi Model: {accuracy}")
     #st.write("#### Overview evaluasi model:")
     #st.text(report)
     
@@ -72,7 +73,7 @@ if uploaded_file is not None:
     #st.write(f"Scaler telah disimpan ke {scaler_filename}")
     
     # Menampilkan confusion matrix
-    st.write("##### Tampilan Confusion Matrix Chart with test size 0.2")
+    st.write("###### Tampilan Confusion Matrix Chart (test size 0.2)")
     f, ax = plt.subplots(figsize=(5, 2))
     sns.heatmap(confusion_matrix(y_test, y_pred), annot=True, fmt=".0f", ax=ax)
     plt.xlabel("y_pred")
@@ -94,7 +95,7 @@ if uploaded_file is not None:
     
     X7 = st.number_input("Isikan skor PFA bersumber dari https://www.opentender.net/tender", value=0.0)
     
-    if st.button("Prediksi"):
+    if st.button("Mari prediksi apakah terdapat temuan (Y) atau tidak (T)"):
         input_data = [float(X1.replace(',', '')), float(X2.replace(',', '')), X3, X4, X5, X6, X7]
         prediction = predict(knn, scaler, input_data)
         st.write(f"Hasil Prediksi: {prediction[0]}")

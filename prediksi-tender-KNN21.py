@@ -39,7 +39,8 @@ def predict(knn, scaler, input_data):
     return prediction
 
 # Judul aplikasi
-st.title("Machine Learning dengan KNN")
+st.title("aplikasi prediksi pekerjaan yang berpotensi terdapat permasalahan (temuan)")
+st.title("### (Implementasi pemograman machine learning dengan algoritma KNN)")
 
 # Mengunggah file CSV
 uploaded_file = st.file_uploader("Unggah file CSV", type=["csv"])
