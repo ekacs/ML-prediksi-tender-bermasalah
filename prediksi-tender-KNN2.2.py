@@ -78,6 +78,8 @@ if uploaded_file is not None:
     #st.write(f"Scaler telah disimpan ke {scaler_filename}")
     
     st.write("## Prediksi baru")
+    #menambahkan input teks bebas
+    X_free_text = st.text_area("Masukkan teks bebas judul tender, kode tender dan lainnya", height=50)
     X1 = st.text_input("Isikan nilai kontrak")
     X2 = st.text_input("Isikan nilai HPS")
     X3 = st.number_input("Isikan lama hari kalender proses lelang mulai awal pengumuman s/d penetapan pemenang akhir", value=0)
