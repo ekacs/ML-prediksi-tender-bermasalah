@@ -48,6 +48,7 @@ st.write("""###### Aplikasi ini bertujuan untuk memprediksi apakah tender terseb
          4) Realisasi Perusahaan pendukung pekerjaan tidak sesuai penawaran""")
 
 st.write("###### Prediksi ini bekerja berdasarkan pengolahan data hasil audit, data umum lelang dan skor potensial fraud analisis dari ICW menggunakan algoritma machine learning KNN" )
+st.write("""###### Artikel rancangan pembuatan machine learning ini dapat dilihat di [karya tulis ini](https://tinyurl.com/ML-prediksi-tender)""")
 
 # Mengunggah file CSV
 uploaded_file = st.file_uploader("Unggah master data penelitian awal (format CSV)", type=["csv"])
