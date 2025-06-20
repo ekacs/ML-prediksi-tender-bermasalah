@@ -99,8 +99,8 @@ if uploaded_file is not None:
     X7 = st.number_input("Isikan skor PFA bersumber dari https://www.opentender.net/tender", value=0.0)
     
     # Informasi tambahan tentang nilai X7
-    st.info("💡 **Catatan**: Jika skor PFA diisi 0, maka akan otomatis dianggap sebagai nilai 88 dalam perhitungan prediksi.")
-    
+    st.info("💡 **Catatan**: Agar skor PFA diisi 0, apabila data tender tidak dapat ditemukan di situs opentender.net.")
+
     if st.button("Mari prediksi apakah terdapat temuan (Y) atau tidak (T)"):
         # Menangani nilai X7 = 0 menjadi 88 untuk prediksi
         X7_processed = 88 if X7 == 0 else X7
