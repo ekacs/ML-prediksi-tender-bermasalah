@@ -13,9 +13,6 @@ def train_model(data):
     # Memastikan kolom X1 dan X2 adalah string sebelum menggantikan tanda koma
     data['X1'] = data['X1'].astype(str).str.replace(',', '').astype(float)
     data['X2'] = data['X2'].astype(str).str.replace(',', '').astype(float)
-    
-    # Menangani nilai X7 = 0 menjadi 88
-    data['X7'] = data['X7'].apply(lambda x: 88 if x == 0 else x)
 
     X = data.drop(columns=['Y'])
     y = data['Y']
@@ -98,33 +95,7 @@ if uploaded_file is not None:
     
     X7 = st.number_input("Isikan skor PFA bersumber dari https://www.opentender.net/tender", value=0.0)
     
-    # Informasi tambahan tentang nilai X7
-    st.info("💡 **Catatan**: Jika skor PFA diisi 0, maka akan otomatis dianggap sebagai nilai 88 dalam perhitungan prediksi.")
-    
     if st.button("Mari prediksi apakah terdapat temuan (Y) atau tidak (T)"):
-        # Menangani nilai X7 = 0 menjadi 88 untuk prediksi
-        X7_processed = 88 if X7 == 0 else X7
-        
-        input_data = [float(X1.replace(',', '')), float(X2.replace(',', '')), X3, X4, X5, X6, X7_processed]
+        input_data = [float(X1.replace(',', '')), float(X2.replace(',', '')), X3, X4, X5, X6, X7]
         prediction = predict(knn, scaler, input_data)
-        
-        # Menampilkan informasi jika X7 diubah
-        if X7 == 0:
-            st.warning(f"⚠️ Nilai skor PFA diubah dari 0 menjadi 88 untuk perhitungan prediksi.")
-        
-        st.write(f"**Hasil Prediksi: {prediction[0]}**")
-        
-        # Menampilkan data input yang digunakan untuk prediksi
-        st.write("##### Data input yang digunakan:")
-        input_display = {
-            "Nilai Kontrak (X1)": f"{X1}",
-            "Nilai HPS (X2)": f"{X2}",
-            "Lama Proses Lelang (X3)": f"{X3} hari",
-            "Rentang Tahun Anggaran (X4)": f"{X4} tahun",
-            "Rasio Kontrak/HPS (X5)": f"{X5:.4f}",
-            "Komplemen Rasio (X6)": f"{X6:.4f}",
-            "Skor PFA (X7)": f"{X7_processed}" + (" (diubah dari 0)" if X7 == 0 else "")
-        }
-        
-        for key, value in input_display.items():
-            st.write(f"- {key}: {value}")
+        st.write(f"Hasil Prediksi: {prediction[0]}")
