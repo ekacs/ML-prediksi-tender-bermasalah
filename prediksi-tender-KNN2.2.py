@@ -110,7 +110,7 @@ if uploaded_file is not None:
         
         # Menampilkan informasi jika X7 diubah
         if X7 == 0:
-            st.warning(f"⚠️ Nilai skor PFA diubah dari 0 menjadi 88 untuk perhitungan prediksi.")
+            st.warning(f"⚠️ Nilai skor PFA diisikan nilai 0 apabila data tender tidak dapat ditemukan di situs opentender.net.")
         
         st.write(f"**Hasil Prediksi: {prediction[0]}**")
         
