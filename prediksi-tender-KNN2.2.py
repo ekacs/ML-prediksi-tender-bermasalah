@@ -43,7 +43,7 @@ def predict(knn, scaler, input_data):
 
 # Judul aplikasi
 st.write("# Red flag tender prediction app")
-st.write("""###### Aplikasi ini bertujuan untuk memprediksi apakah tender tersebut berpotensi menjadi temuan
+st.write("""###### Aplikasi ini bertujuan untuk memprediksi apakah nanti pada saat pelaksanaan tender tersebut akan berpotensi bermasalah (Y) atau tidak bermasalah (T)
          Prediksi temuan dimaksud adalah:
          1) Keterlambatan pekerjaan
          2) Realisasi pekerjaan tidak sesuai spektek
