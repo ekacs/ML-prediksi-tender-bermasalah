@@ -123,7 +123,7 @@ if uploaded_file is not None:
             "Rentang Tahun Anggaran (X4)": f"{X4} tahun",
             "Rasio Kontrak/HPS (X5)": f"{X5:.4f}",
             "Komplemen Rasio (X6)": f"{X6:.4f}",
-            "Skor PFA (X7)": f"{X7_processed}" + (" (diubah dari 0)" if X7 == 0 else "")
+            #"Skor PFA (X7)": f"{X7_processed}" + (" (diubah dari 0)" if X7 == 0 else "")
         }
         
         for key, value in input_display.items():
